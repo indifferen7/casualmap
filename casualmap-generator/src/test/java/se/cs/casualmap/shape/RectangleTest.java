@@ -1,4 +1,4 @@
-package se.cs.casualmap.grid;
+package se.cs.casualmap.shape;
 
 import org.junit.Test;
 import se.cs.casualmap.model.shared.Direction;

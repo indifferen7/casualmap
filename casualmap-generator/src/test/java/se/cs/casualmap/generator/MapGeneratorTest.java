@@ -1,7 +1,7 @@
 package se.cs.casualmap.generator;
 
 import org.junit.Test;
-import se.cs.casualmap.grid.*;
+import se.cs.casualmap.shape.*;
 import se.cs.casualmap.model.map.Map;
 
 import java.util.ArrayList;

@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import se.cs.casualmap.generator.MapGenerator;
 import se.cs.casualmap.generator.MapGeneratorArgs;
-import se.cs.casualmap.grid.*;
+import se.cs.casualmap.shape.*;
 import se.cs.casualmap.model.map.Passage;
 import se.cs.casualmap.model.shared.Tile;
 import se.cs.casualmap.model.map.Map;

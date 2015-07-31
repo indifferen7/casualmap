@@ -1,7 +1,10 @@
-package se.cs.casualmap.grid;
+package se.cs.casualmap.generator;
 
 import org.junit.Test;
+import se.cs.casualmap.shape.Rectangle;
+import se.cs.casualmap.shape.Shape;
 import se.cs.casualmap.model.shared.Tile;
+import se.cs.casualmap.shape.ShapeFactory;
 
 import java.util.Collection;
 
@@ -12,11 +15,13 @@ import static org.junit.Assert.*;
  */
 public class GridTest {
 
+    private ShapeFactory<Rectangle> factory = new Rectangle.Factory();
+
     @Test
     public void place() {
         Grid grid = new Grid(400, 400);
 
-        Shape result = grid.place(new Rectangle(new Tile(4, 4), 2, 2));
+        Shape result = grid.place(factory.create(new Tile(4, 4), 2, 2));
 
         assertEquals(4, result.getTiles().size());
         assertTrue(result.getTiles().contains(new Tile(4, 4)));
@@ -31,7 +36,7 @@ public class GridTest {
 
         grid.translate(new Tile(4, 4));
 
-        Shape result = grid.place(new Rectangle(new Tile(0, 0), 2, 2));
+        Shape result = grid.place(factory.create(new Tile(0, 0), 2, 2));
 
         // grid had been translated to (4, 4)..
         assertEquals(4, result.getTiles().size());
@@ -48,7 +53,7 @@ public class GridTest {
         grid.translate(new Tile(4, 4));
         grid.translateReset();
 
-        Shape result = grid.place(new Rectangle(new Tile(4, 4), 2, 2));
+        Shape result = grid.place(factory.create(new Tile(4, 4), 2, 2));
 
         // coordinates should begin on (4, 4) instead of (8, 8) as
         // we have reset the translation
@@ -69,7 +74,7 @@ public class GridTest {
         // grid is translated to (8, 8)
         grid.translateFromCurrent(new Tile(4, 4));
 
-        Shape result = grid.place(new Rectangle(new Tile(0, 0), 2, 2));
+        Shape result = grid.place(factory.create(new Tile(0, 0), 2, 2));
 
         assertEquals(4, result.getTiles().size());
         assertTrue(result.getTiles().contains(new Tile(8, 8)));
@@ -83,7 +88,7 @@ public class GridTest {
         Grid grid = new Grid(400, 400);
 
         grid.translate(new Tile(4, 4));
-        Shape shape = new Rectangle(new Tile(0, 0), 2, 2);
+        Shape shape = factory.create(new Tile(0, 0), 2, 2);
 
         assertTrue(grid.fits(shape));
     }
@@ -93,7 +98,7 @@ public class GridTest {
         Grid grid = new Grid(400, 400);
 
         grid.translate(new Tile(4, 4));
-        Shape shape = new Rectangle(new Tile(0, 0), 2, 2);
+        Shape shape = factory.create(new Tile(0, 0), 2, 2);
         grid.place(shape);
 
         // the tiles have now been occupied so the grid should not fit the same shape again
@@ -105,7 +110,7 @@ public class GridTest {
         Grid grid = new Grid(400, 400);
 
         grid.translate(new Tile(400, 400));
-        Shape shape = new Rectangle(new Tile(0, 0), 2, 2);
+        Shape shape = factory.create(new Tile(0, 0), 2, 2);
 
         assertFalse(grid.fits(shape));
     }
@@ -114,7 +119,7 @@ public class GridTest {
     public void getShapes() {
         Grid grid = new Grid(400, 400);
 
-        Shape shape = grid.place(new Rectangle(new Tile(4, 4), 2, 2));
+        Shape shape = grid.place(factory.create(new Tile(4, 4), 2, 2));
 
         Collection<Shape> result = grid.getShapes();
 

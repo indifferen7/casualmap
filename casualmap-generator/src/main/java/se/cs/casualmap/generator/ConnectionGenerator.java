@@ -1,6 +1,6 @@
 package se.cs.casualmap.generator;
 
-import se.cs.casualmap.grid.Shape;
+import se.cs.casualmap.shape.Shape;
 import se.cs.casualmap.model.shared.Direction;
 import se.cs.casualmap.model.shared.Tile;
 

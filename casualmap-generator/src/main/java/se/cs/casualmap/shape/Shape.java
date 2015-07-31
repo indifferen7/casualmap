@@ -1,4 +1,4 @@
-package se.cs.casualmap.grid;
+package se.cs.casualmap.shape;
 
 import se.cs.casualmap.model.shared.Direction;
 import se.cs.casualmap.model.shared.Tile;

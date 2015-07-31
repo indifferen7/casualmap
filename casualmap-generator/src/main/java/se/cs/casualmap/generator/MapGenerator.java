@@ -1,11 +1,10 @@
 package se.cs.casualmap.generator;
 
-import se.cs.casualmap.grid.Shape;
-import se.cs.casualmap.grid.ShapeFactory;
+import se.cs.casualmap.shape.Shape;
+import se.cs.casualmap.shape.ShapeFactory;
 import se.cs.casualmap.model.map.Area;
 import se.cs.casualmap.model.map.Map;
 import se.cs.casualmap.model.map.Passage;
-import se.cs.casualmap.model.shared.Tile;
 
 import java.util.*;
 

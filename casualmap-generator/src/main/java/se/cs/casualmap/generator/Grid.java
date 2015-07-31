@@ -1,5 +1,6 @@
-package se.cs.casualmap.grid;
+package se.cs.casualmap.generator;
 
+import se.cs.casualmap.shape.Shape;
 import se.cs.casualmap.model.shared.Tile;
 
 import java.util.*;

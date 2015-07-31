@@ -1,9 +1,9 @@
 package se.cs.casualmap.generator;
 
 import org.junit.Test;
-import se.cs.casualmap.grid.Rectangle;
-import se.cs.casualmap.grid.Shape;
-import se.cs.casualmap.grid.ShapeFactory;
+import se.cs.casualmap.shape.Rectangle;
+import se.cs.casualmap.shape.Shape;
+import se.cs.casualmap.shape.ShapeFactory;
 import se.cs.casualmap.model.shared.Tile;
 
 import java.util.List;
