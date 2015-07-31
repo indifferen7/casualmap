@@ -65,8 +65,8 @@ public class ShapesGenerator {
         int areaHeight = args.getMinAreaHeight() + random.nextInt(args.getMaxAreaHeight() - args.getMinAreaHeight()) + 1;
 
         Tile topLeft = new Tile(
-                random.nextInt(args.getWidth() - areaWidth),
-                random.nextInt(args.getHeight() - areaHeight));
+                random.nextInt(args.getWidth() / 2),
+                random.nextInt(args.getHeight() / 2));
 
         return shapeFactory.create(topLeft, areaWidth, areaHeight);
     }
