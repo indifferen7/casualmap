@@ -8,4 +8,4 @@ Anyway, screw that, the following main points sums up what this tile map project
 **The casualmap project should**
 * offer a sweet and easy api to work with tile maps
 * include a way to generate such maps
-* support for serializing and deserializing maps
+* support serialization and deserialization of maps
