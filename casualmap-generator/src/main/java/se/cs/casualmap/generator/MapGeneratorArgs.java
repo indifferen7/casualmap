@@ -1,5 +1,8 @@
 package se.cs.casualmap.generator;
 
+/**
+ * Map generator args, not very flexible at the moment.. ;)
+ */
 public class MapGeneratorArgs {
 
     private int width = 50;

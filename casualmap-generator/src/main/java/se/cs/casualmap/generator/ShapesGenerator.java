@@ -5,6 +5,12 @@ import se.cs.casualmap.model.shared.Tile;
 
 import java.util.*;
 
+/**
+ * This class generates lined up {@link Shape}s based on the provided {@link MapGeneratorArgs}.
+ * The creation of shapes are handled by the enclosed shapeFactory, making the shape form
+ * unknown for this algorithm. The only thing this class cares about is that the shapes are
+ * well formed, i.e. they form a filled region.
+ */
 public class ShapesGenerator {
     private final MapGeneratorArgs args;
     private final Random random = new Random();
@@ -17,6 +23,9 @@ public class ShapesGenerator {
         this.shapeFactory = shapeFactory;
     }
 
+    /**
+     * @return a collection of lined up shapes.
+     */
     Collection<Shape> generate() {
         int attempts = 0;
 
