@@ -5,6 +5,10 @@ import se.cs.casualmap.model.shared.Tile;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Delegates the creation of shapes randomly to the enclosed {@link ShapeFactory}
+ * instances.
+ */
 public class RandomShapeFactory implements ShapeFactory<Shape> {
 
     private List<ShapeFactory<? extends Shape>> factories;

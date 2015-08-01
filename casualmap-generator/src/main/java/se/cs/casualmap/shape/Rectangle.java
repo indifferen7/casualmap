@@ -6,6 +6,9 @@ import se.cs.casualmap.model.shared.Tile;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * A rectangular shape.
+ */
 public class Rectangle implements Shape {
 
     private Tile topLeft;
@@ -14,12 +17,6 @@ public class Rectangle implements Shape {
 
     Rectangle(Tile topLeft, int width, int height) {
         this.topLeft = topLeft;
-        this.width = width;
-        this.height = height;
-    }
-
-    Rectangle(int width, int height) {
-        this.topLeft = new Tile(0, 0);
         this.width = width;
         this.height = height;
     }

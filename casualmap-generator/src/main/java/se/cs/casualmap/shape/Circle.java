@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * A circular shape.
+ */
 public class Circle implements Shape {
 
     private Tile topLeft;
@@ -20,10 +23,6 @@ public class Circle implements Shape {
         this.height = height;
 
         generateTiles();
-    }
-
-    private Circle(int width, int height) {
-        this(new Tile(0, 0), width, height);
     }
 
     @Override
@@ -49,6 +48,9 @@ public class Circle implements Shape {
         return result;
     }
 
+    /**
+     * Super inspired by http://rosettacode.org/wiki/Bitmap/Midpoint_circle_algorithm#Java
+     */
     private void generateTiles() {
         final int centerX = topLeft.getX() + (width / 2);
         final int centerY = topLeft.getY() + (height / 2);
