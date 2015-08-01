@@ -1,6 +1,6 @@
 package se.cs.casualmap.shape;
 
-import se.cs.casualmap.model.shared.Tile;
+import se.cs.casualmap.api.shared.Tile;
 
 import java.util.List;
 import java.util.Random;

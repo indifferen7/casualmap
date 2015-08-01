@@ -1,4 +1,4 @@
-package se.cs.casualmap.model.shared;
+package se.cs.casualmap.api.shared;
 
 import java.util.Arrays;
 import java.util.Collections;

@@ -1,8 +1,8 @@
 package se.cs.casualmap.generator;
 
 import se.cs.casualmap.shape.Shape;
-import se.cs.casualmap.model.shared.Tile;
-import se.cs.casualmap.model.shared.Direction;
+import se.cs.casualmap.api.shared.Tile;
+import se.cs.casualmap.api.shared.Direction;
 
 import java.util.ArrayList;
 import java.util.List;

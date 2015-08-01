@@ -2,9 +2,9 @@ package se.cs.casualmap.generator;
 
 import se.cs.casualmap.shape.Shape;
 import se.cs.casualmap.shape.ShapeFactory;
-import se.cs.casualmap.model.map.Area;
-import se.cs.casualmap.model.map.Map;
-import se.cs.casualmap.model.map.Passage;
+import se.cs.casualmap.api.map.Area;
+import se.cs.casualmap.api.map.Map;
+import se.cs.casualmap.api.map.Passage;
 
 import java.util.*;
 

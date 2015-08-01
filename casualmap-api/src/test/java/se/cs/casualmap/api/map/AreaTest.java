@@ -1,8 +1,8 @@
-package se.cs.casualmap.model.map;
+package se.cs.casualmap.api.map;
 
 import org.junit.Test;
-import se.cs.casualmap.model.shared.Direction;
-import se.cs.casualmap.model.shared.Tile;
+import se.cs.casualmap.api.shared.Direction;
+import se.cs.casualmap.api.shared.Tile;
 
 import java.util.HashSet;
 import java.util.Set;

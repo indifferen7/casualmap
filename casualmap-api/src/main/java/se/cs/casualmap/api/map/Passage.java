@@ -1,6 +1,6 @@
-package se.cs.casualmap.model.map;
+package se.cs.casualmap.api.map;
 
-import se.cs.casualmap.model.shared.Tile;
+import se.cs.casualmap.api.shared.Tile;
 
 public class Passage {
     private final int id;

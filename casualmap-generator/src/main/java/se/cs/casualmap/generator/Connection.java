@@ -1,6 +1,6 @@
 package se.cs.casualmap.generator;
 
-import se.cs.casualmap.model.shared.Tile;
+import se.cs.casualmap.api.shared.Tile;
 
 /**
  * This class represents a connection between two {@link se.cs.casualmap.shape.Shape}s

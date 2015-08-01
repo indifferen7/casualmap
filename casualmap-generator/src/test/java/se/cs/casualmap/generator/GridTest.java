@@ -3,7 +3,7 @@ package se.cs.casualmap.generator;
 import org.junit.Test;
 import se.cs.casualmap.shape.Rectangle;
 import se.cs.casualmap.shape.Shape;
-import se.cs.casualmap.model.shared.Tile;
+import se.cs.casualmap.api.shared.Tile;
 import se.cs.casualmap.shape.ShapeFactory;
 
 import java.util.Collection;

@@ -1,6 +1,6 @@
 package se.cs.casualmap.shape;
 
-import se.cs.casualmap.model.shared.Tile;
+import se.cs.casualmap.api.shared.Tile;
 
 /**
  * Implementors of this contract must be able to construct

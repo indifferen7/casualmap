@@ -1,4 +1,4 @@
-package se.cs.casualmap.model.shared;
+package se.cs.casualmap.api.shared;
 
 public class Tile {
 
