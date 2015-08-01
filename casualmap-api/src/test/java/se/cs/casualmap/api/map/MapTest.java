@@ -2,8 +2,10 @@ package se.cs.casualmap.api.map;
 
 import com.google.common.base.Optional;
 import org.junit.Test;
+import se.cs.casualmap.api.shared.Direction;
 import se.cs.casualmap.api.shared.Tile;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,6 +51,32 @@ public class MapTest {
 
         area = map.getArea(Tile.at(42, 42));
         assertFalse(area.isPresent());
+    }
+
+    @Test
+    public void getPassagesByArea() {
+        Map map = newMap();
+
+        Area area = new Area(1, createRectangle(Tile.at(2, 0), 2, 2));
+        Collection<Passage> passages = map.getPassages(area);
+
+        assertEquals(2, passages.size());
+    }
+
+    @Test
+    public void getPassagesByAreaInDirection() {
+        Map map = newMap();
+
+        Area area = new Area(1, createRectangle(Tile.at(2, 0), 2, 2));
+        Collection<Passage> passages = map.getPassages(area, Direction.DOWN);
+
+        // there is one passage downwards..
+        assertEquals(1, passages.size());
+
+        passages = map.getPassages(area, Direction.LEFT);
+
+        // ..and another one to the left
+        assertEquals(1, passages.size());
     }
 
     private Map newMap() {
