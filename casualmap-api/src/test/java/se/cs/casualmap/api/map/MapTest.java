@@ -26,6 +26,31 @@ public class MapTest {
         assertFalse(area.isPresent());
     }
 
+    @Test
+    public void getPassageById() {
+        Map map = newMap();
+
+        Optional<Passage> passage = map.getPassage(1);
+
+        assertTrue(passage.isPresent());
+        assertEquals(1, passage.get().getId());
+
+        passage = map.getPassage(42);
+        assertFalse(passage.isPresent());
+    }
+
+    @Test
+    public void getAreaByTile() {
+        Map map = newMap();
+
+        Optional<Area> area = map.getArea(new Tile(0, 0));
+        assertTrue(area.isPresent());
+        assertEquals(0, area.get().getId());
+
+        area = map.getArea(new Tile(42, 42));
+        assertFalse(area.isPresent());
+    }
+
     private Map newMap() {
         /**
          * Like so:
@@ -42,7 +67,7 @@ public class MapTest {
 
         Set<Passage> passages = new HashSet<>();
         passages.add(new Passage(0, new Tile(1, 0), new Tile(2, 0)));
-        passages.add(new Passage(0, new Tile(2, 1), new Tile(2, 2)));
+        passages.add(new Passage(1, new Tile(2, 1), new Tile(2, 2)));
 
         return new Map(areas, passages, 4, 4);
     }
