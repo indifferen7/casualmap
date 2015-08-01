@@ -47,7 +47,7 @@ public class Sample extends Application {
         final Text info = new Text();
         title.setText("Sample map generator");
 
-        final Canvas canvas = new Canvas(400, 400);
+        final Canvas canvas = new Canvas(600, 600);
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -80,7 +80,7 @@ public class Sample extends Application {
         StackPane.setMargin(info, new Insets(60, 10, 10, 10));
 
         root.getChildren().add(canvas);
-        primaryStage.setScene(new Scene(root, 500, 600));
+        primaryStage.setScene(new Scene(root, 1000, 800));
         primaryStage.show();
     }
 
