@@ -25,7 +25,7 @@ public class Map {
         for (Area area : areaByTile) {
             this.areaById.put(area.getId(), area);
 
-            for (Tile tile : area.getTiles()) {
+            for (Tile tile : area.allTiles()) {
                 this.areaByTile.put(tile, area);
             }
         }
@@ -62,8 +62,8 @@ public class Map {
         Collection<Passage> result = new ArrayList<>();
 
         for (Passage passage : passages.values()) {
-            Optional<Area> candidateA = areaWithTile(passage.getTileAreaA());
-            Optional<Area> candidateB = areaWithTile(passage.getTileAreaB());
+            Optional<Area> candidateA = areaWithTile(passage.tileOne());
+            Optional<Area> candidateB = areaWithTile(passage.tileTwo());
 
             if (candidateA.isPresent() && candidateA.get().equals(area)) {
                 result.add(passage);
@@ -80,13 +80,13 @@ public class Map {
         Collection<Passage> result = new ArrayList<>();
 
         for (Passage passage : passagesAt(area)) {
-            Tile thisAreaTile = areaWithTile(passage.getTileAreaA()).get().equals(area)
-                    ? passage.getTileAreaA()
-                    : passage.getTileAreaB();
+            Tile thisAreaTile = areaWithTile(passage.tileOne()).get().equals(area)
+                    ? passage.tileOne()
+                    : passage.tileTwo();
 
-            Tile otherAreaTile = passage.getTileAreaA().equals(thisAreaTile)
-                    ? passage.getTileAreaB()
-                    : passage.getTileAreaA();
+            Tile otherAreaTile = passage.tileOne().equals(thisAreaTile)
+                    ? passage.tileTwo()
+                    : passage.tileOne();
 
             if (thisAreaTile.relativeTo(direction).equals(otherAreaTile)) {
                 result.add(passage);
@@ -102,5 +102,13 @@ public class Map {
 
     public int height() {
         return height;
+    }
+
+    @Override
+    public String toString() {
+        return "Map{" +
+                "width=" + width +
+                ", height=" + height +
+                '}';
     }
 }

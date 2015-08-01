@@ -23,25 +23,25 @@ public class AreaTest {
 
         Area area = new Area(0, tiles);
 
-        Set<Tile> result = area.getTiles(Direction.LEFT);
+        Set<Tile> result = area.tilesIn(Direction.LEFT);
 
         assertEquals(2, result.size());
         assertTrue(result.contains(Tile.at(1, 1)));
         assertTrue(result.contains(Tile.at(1, 2)));
 
-        result = area.getTiles(Direction.DOWN);
+        result = area.tilesIn(Direction.DOWN);
 
         assertEquals(2, result.size());
         assertTrue(result.contains(Tile.at(1, 2)));
         assertTrue(result.contains(Tile.at(2, 2)));
 
-        result = area.getTiles(Direction.RIGHT);
+        result = area.tilesIn(Direction.RIGHT);
 
         assertEquals(2, result.size());
         assertTrue(result.contains(Tile.at(2, 1)));
         assertTrue(result.contains(Tile.at(2, 2)));
 
-        result = area.getTiles(Direction.UP);
+        result = area.tilesIn(Direction.UP);
 
         assertEquals(2, result.size());
         assertTrue(result.contains(Tile.at(1, 1)));

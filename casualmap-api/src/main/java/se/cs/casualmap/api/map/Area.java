@@ -20,11 +20,11 @@ public class Area {
         return id;
     }
 
-    public Set<Tile> getTiles() {
+    public Set<Tile> allTiles() {
         return Collections.unmodifiableSet(tiles);
     }
 
-    public Set<Tile> getTiles(Direction direction) {
+    public Set<Tile> tilesIn(Direction direction) {
         Set<Tile> result = new HashSet<Tile>();
 
         for (Tile tile : tiles) {

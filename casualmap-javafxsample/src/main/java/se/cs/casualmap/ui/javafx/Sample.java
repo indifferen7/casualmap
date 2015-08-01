@@ -112,7 +112,7 @@ public class Sample extends Application {
             gc.setStroke(Color.GREY);
             gc.setLineWidth(.5);
 
-            for (Tile tile : area.getTiles()) {
+            for (Tile tile : area.allTiles()) {
                 gc.fillRect(tile.getX() * widthRatio,
                         tile.getY() * heightRatio,
                         widthRatio,
@@ -127,7 +127,7 @@ public class Sample extends Application {
             gc.setLineWidth(1);
             gc.setStroke(Color.DARKGREEN);
             for (Direction direction : Direction.scramble()) {
-                for (Tile tile : area.getTiles(direction)) {
+                for (Tile tile : area.tilesIn(direction)) {
                     double fromX = direction.equals(Direction.RIGHT)
                             ? tile.getX() * widthRatio + widthRatio
                             : tile.getX() * widthRatio;
@@ -151,13 +151,13 @@ public class Sample extends Application {
 
         gc.setFill(Color.BROWN);
         for (Passage passage : map.allPassages()) {
-            gc.fillRect(passage.getTileAreaA().getX() * widthRatio,
-                    passage.getTileAreaA().getY() * heightRatio,
+            gc.fillRect(passage.tileOne().getX() * widthRatio,
+                    passage.tileOne().getY() * heightRatio,
                     widthRatio,
                     heightRatio);
 
-            gc.fillRect(passage.getTileAreaB().getX() * widthRatio,
-                    passage.getTileAreaB().getY() * heightRatio,
+            gc.fillRect(passage.tileTwo().getX() * widthRatio,
+                    passage.tileTwo().getY() * heightRatio,
                     widthRatio,
                     heightRatio);
         }
