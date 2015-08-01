@@ -38,32 +38,32 @@ public class Map {
         this.height = mapHeight;
     }
 
-    public Collection<Area> getAreas() {
+    public Collection<Area> allAreas() {
         return areaById.values();
     }
 
-    public Optional<Area> getArea(int id) {
+    public Optional<Area> areaWithId(int id) {
         return Optional.fromNullable(areaById.get(id));
     }
 
-    public Optional<Area> getArea(Tile tile) {
+    public Optional<Area> areaWithTile(Tile tile) {
         return Optional.fromNullable(areaByTile.get(tile));
     }
 
-    public Collection<Passage> getPassages() {
+    public Collection<Passage> allPassages() {
         return passages.values();
     }
 
-    public Optional<Passage> getPassage(int id) {
+    public Optional<Passage> passageWithId(int id) {
         return Optional.fromNullable(passages.get(id));
     }
 
-    public Collection<Passage> getPassages(Area area) {
+    public Collection<Passage> passagesAt(Area area) {
         Collection<Passage> result = new ArrayList<>();
 
         for (Passage passage : passages.values()) {
-            Optional<Area> candidateA = getArea(passage.getTileAreaA());
-            Optional<Area> candidateB = getArea(passage.getTileAreaB());
+            Optional<Area> candidateA = areaWithTile(passage.getTileAreaA());
+            Optional<Area> candidateB = areaWithTile(passage.getTileAreaB());
 
             if (candidateA.isPresent() && candidateA.get().equals(area)) {
                 result.add(passage);
@@ -76,11 +76,11 @@ public class Map {
         return result;
     }
 
-    public Collection<Passage> getPassages(Area area, Direction direction) {
+    public Collection<Passage> passagesAt(Area area, Direction direction) {
         Collection<Passage> result = new ArrayList<>();
 
-        for (Passage passage : getPassages(area)) {
-            Tile thisAreaTile = getArea(passage.getTileAreaA()).get().equals(area)
+        for (Passage passage : passagesAt(area)) {
+            Tile thisAreaTile = areaWithTile(passage.getTileAreaA()).get().equals(area)
                     ? passage.getTileAreaA()
                     : passage.getTileAreaB();
 
@@ -96,11 +96,11 @@ public class Map {
         return result;
     }
 
-    public int getWidth() {
+    public int width() {
         return width;
     }
 
-    public int getHeight() {
+    public int height() {
         return height;
     }
 }

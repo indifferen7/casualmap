@@ -19,12 +19,12 @@ public class MapTest {
     public void getAreaById() {
         Map map = newMap();
 
-        Optional<Area> area = map.getArea(1);
+        Optional<Area> area = map.areaWithId(1);
 
         assertTrue(area.isPresent());
         assertEquals(1, area.get().getId());
 
-        area = map.getArea(42);
+        area = map.areaWithId(42);
         assertFalse(area.isPresent());
     }
 
@@ -32,12 +32,12 @@ public class MapTest {
     public void getPassageById() {
         Map map = newMap();
 
-        Optional<Passage> passage = map.getPassage(1);
+        Optional<Passage> passage = map.passageWithId(1);
 
         assertTrue(passage.isPresent());
         assertEquals(1, passage.get().getId());
 
-        passage = map.getPassage(42);
+        passage = map.passageWithId(42);
         assertFalse(passage.isPresent());
     }
 
@@ -45,11 +45,11 @@ public class MapTest {
     public void getAreaByTile() {
         Map map = newMap();
 
-        Optional<Area> area = map.getArea(Tile.at(0, 0));
+        Optional<Area> area = map.areaWithTile(Tile.at(0, 0));
         assertTrue(area.isPresent());
         assertEquals(0, area.get().getId());
 
-        area = map.getArea(Tile.at(42, 42));
+        area = map.areaWithTile(Tile.at(42, 42));
         assertFalse(area.isPresent());
     }
 
@@ -58,7 +58,7 @@ public class MapTest {
         Map map = newMap();
 
         Area area = new Area(1, createRectangle(Tile.at(2, 0), 2, 2));
-        Collection<Passage> passages = map.getPassages(area);
+        Collection<Passage> passages = map.passagesAt(area);
 
         assertEquals(2, passages.size());
     }
@@ -68,12 +68,12 @@ public class MapTest {
         Map map = newMap();
 
         Area area = new Area(1, createRectangle(Tile.at(2, 0), 2, 2));
-        Collection<Passage> passages = map.getPassages(area, Direction.DOWN);
+        Collection<Passage> passages = map.passagesAt(area, Direction.DOWN);
 
         // there is one passage downwards..
         assertEquals(1, passages.size());
 
-        passages = map.getPassages(area, Direction.LEFT);
+        passages = map.passagesAt(area, Direction.LEFT);
 
         // ..and another one to the left
         assertEquals(1, passages.size());

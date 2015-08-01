@@ -93,8 +93,8 @@ public class Sample extends Application {
         gc.setStroke(Color.BLACK);
         gc.strokeRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        final double widthRatio = canvas.getWidth() / map.getWidth();
-        final double heightRatio = canvas.getHeight() / map.getHeight();
+        final double widthRatio = canvas.getWidth() / map.width();
+        final double heightRatio = canvas.getHeight() / map.height();
 
         gc.setFill(Color.BLACK);
         canvas.addEventHandler(MouseEvent.MOUSE_MOVED,
@@ -107,7 +107,7 @@ public class Sample extends Application {
                     }
                 });
 
-        for (Area area : map.getAreas()) {
+        for (Area area : map.allAreas()) {
             gc.setFill(Color.LIGHTGREEN);
             gc.setStroke(Color.GREY);
             gc.setLineWidth(.5);
@@ -150,7 +150,7 @@ public class Sample extends Application {
         }
 
         gc.setFill(Color.BROWN);
-        for (Passage passage : map.getPassages()) {
+        for (Passage passage : map.allPassages()) {
             gc.fillRect(passage.getTileAreaA().getX() * widthRatio,
                     passage.getTileAreaA().getY() * heightRatio,
                     widthRatio,
