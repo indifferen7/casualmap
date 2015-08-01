@@ -31,7 +31,7 @@ public class ConnectionGenerator {
                 continue;
             }
 
-            Connection connection = generatePassageFrom(shape, withConnections);
+            Connection connection = generateConnectionFrom(shape, withConnections);
 
             if (connection != null) {
                 result.add(connection);
@@ -51,7 +51,7 @@ public class ConnectionGenerator {
         return result;
     }
 
-    Connection generatePassageFrom(Shape shape, final Set<Shape> withConnections) {
+    Connection generateConnectionFrom(Shape shape, final Set<Shape> withConnections) {
         List<Shape> neighbours = new ArrayList<>();
 
         for (Shape s : neighbours(shape)) {
