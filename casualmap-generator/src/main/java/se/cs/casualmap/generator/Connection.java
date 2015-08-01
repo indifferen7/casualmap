@@ -2,6 +2,11 @@ package se.cs.casualmap.generator;
 
 import se.cs.casualmap.model.shared.Tile;
 
+/**
+ * This class represents a connection between two {@link se.cs.casualmap.shape.Shape}s
+ * in a {@link Grid} via the two contained {@link Tile}s. Its constructor is package
+ * private as it is not relevant outside the map generation context.
+ */
 public class Connection {
     private final Tile tile1;
     private final Tile tile2;

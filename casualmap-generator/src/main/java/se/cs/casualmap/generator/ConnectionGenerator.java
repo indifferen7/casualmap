@@ -6,10 +6,15 @@ import se.cs.casualmap.model.shared.Tile;
 
 import java.util.*;
 
+/**
+ * The purpose of this class is to generate {@link Connection}s between
+ * the {@link Shape}s provided via the constructor so that all shapes
+ * can be reached by traversing connections, i.e. one big region is formed.
+ */
 public class ConnectionGenerator {
 
     private final Collection<Shape> shapes;
-    private final Map<Tile, Shape> tileByShape = new HashMap<>();
+    private final Map<Tile, Shape> shapeByTile = new HashMap<>();
     private final Random random = new Random();
 
     ConnectionGenerator(Collection<Shape> shapes) {
@@ -17,11 +22,14 @@ public class ConnectionGenerator {
 
         for (Shape shape : shapes) {
             for (Tile tile : shape.getTiles()) {
-                tileByShape.put(tile, shape);
+                shapeByTile.put(tile, shape);
             }
         }
     }
 
+    /**
+     * Generates connections between the enclosed {@link Shape}s.
+     */
     Set<Connection> generate() {
         Set<Connection> result = new HashSet<>();
 
@@ -51,7 +59,7 @@ public class ConnectionGenerator {
         return result;
     }
 
-    Connection generateConnectionFrom(Shape shape, final Set<Shape> withConnections) {
+    private Connection generateConnectionFrom(Shape shape, final Set<Shape> withConnections) {
         List<Shape> neighbours = new ArrayList<>();
 
         for (Shape s : neighbours(shape)) {
@@ -98,7 +106,7 @@ public class ConnectionGenerator {
 
     private Connection createConnectionBetween(Shape one, Shape two) {
 
-        List<Connection> connections = new ArrayList<Connection>();
+        List<Connection> connections = new ArrayList<>();
 
         for (Direction direction : Direction.scramble()) {
             for (Tile oneBorderTile : one.getTiles(direction)) {
@@ -135,10 +143,10 @@ public class ConnectionGenerator {
         for (Connection connection : connections) {
             Shape neighbour = null;
             if (shape.getTiles().contains(connection.getTile1())) {
-                neighbour = tileByShape.get(connection.getTile2());
+                neighbour = shapeByTile.get(connection.getTile2());
             }
             else if (shape.getTiles().contains(connection.getTile2())) {
-                neighbour = tileByShape.get(connection.getTile1());
+                neighbour = shapeByTile.get(connection.getTile1());
             }
 
             if (neighbour != null && !result.contains(neighbour)) {
@@ -157,7 +165,7 @@ public class ConnectionGenerator {
                 Set<Tile> border = shape.getTiles(direction);
 
                 for (Tile tile : border) {
-                    Shape other = tileByShape.get(tile.relativeTo(direction));
+                    Shape other = shapeByTile.get(tile.relativeTo(direction));
                     if (other != null && !region.contains(other)) {
                         return new Connection(tile, tile.relativeTo(direction));
                     }
