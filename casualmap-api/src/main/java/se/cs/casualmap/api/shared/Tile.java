@@ -5,9 +5,13 @@ public class Tile {
     private final int x;
     private final int y;
 
-    public Tile(int x, int y) {
+    private Tile(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public static Tile at(int x, int y) {
+        return new Tile(x, y);
     }
 
     public int getX() {
@@ -19,7 +23,7 @@ public class Tile {
     }
 
     public Tile add(Tile tile) {
-        return new Tile(x + tile.getX(), y + tile.getY());
+        return at(x + tile.getX(), y + tile.getY());
     }
 
     public Tile relativeTo(Direction direction) {
@@ -28,13 +32,13 @@ public class Tile {
 
     public Tile relativeTo(Direction direction, int steps) {
         if (direction.equals(Direction.UP))
-            return new Tile(this.getX(), this.getY() - steps);
+            return at(this.getX(), this.getY() - steps);
         if (direction.equals(Direction.RIGHT))
-            return new Tile(this.getX() + steps, this.getY());
+            return at(this.getX() + steps, this.getY());
         if (direction.equals(Direction.DOWN))
-            return new Tile(this.getX(), this.getY() + steps);
+            return at(this.getX(), this.getY() + steps);
         if (direction.equals(Direction.LEFT))
-            return new Tile(this.getX() - steps, this.getY());
+            return at(this.getX() - steps, this.getY());
 
         throw new RuntimeException(String.format("Unknown direction: %s ", direction));
     }

@@ -30,7 +30,7 @@ public class Rectangle implements Shape {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                tiles.add(new Tile(topLeft.getX() + x, topLeft.getY() + y));
+                tiles.add(Tile.at(topLeft.getX() + x, topLeft.getY() + y));
             }
         }
 
@@ -42,22 +42,22 @@ public class Rectangle implements Shape {
 
         if (direction.equals(Direction.LEFT)) {
             for (int y = 0; y < height; y++) {
-                tiles.add(new Tile(topLeft.getX(), topLeft.getY() + y));
+                tiles.add(Tile.at(topLeft.getX(), topLeft.getY() + y));
             }
         }
         else if (direction.equals(Direction.DOWN)) {
             for (int x = 0; x < width; x++) {
-                tiles.add(new Tile(topLeft.getX() + x, topLeft.getY() + height - 1));
+                tiles.add(Tile.at(topLeft.getX() + x, topLeft.getY() + height - 1));
             }
         }
         else if (direction.equals(Direction.RIGHT)) {
             for (int y = 0; y < height; y++) {
-                tiles.add(new Tile(topLeft.getX() + width - 1, topLeft.getY() + y));
+                tiles.add(Tile.at(topLeft.getX() + width - 1, topLeft.getY() + y));
             }
         }
         else {
             for (int x = 0; x < width; x++) {
-                tiles.add(new Tile(topLeft.getX() + x, topLeft.getY()));
+                tiles.add(Tile.at(topLeft.getX() + x, topLeft.getY()));
             }
         }
 

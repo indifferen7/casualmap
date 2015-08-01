@@ -62,10 +62,10 @@ public class Circle implements Shape {
 
         Set<Tile> tiles = new HashSet<>();
         do {
-            tiles.addAll(generateTileRow(new Tile(centerX - y, centerY + x), new Tile(centerX + y, centerY + x)));
-            tiles.addAll(generateTileRow(new Tile(centerX - x, centerY + y), new Tile(centerX + x, centerY + y)));
-            tiles.addAll(generateTileRow(new Tile(centerX - x, centerY - y), new Tile(centerX + x, centerY - y)));
-            tiles.addAll(generateTileRow(new Tile(centerX - y, centerY - x), new Tile(centerX + y, centerY - x)));
+            tiles.addAll(generateTileRow(Tile.at(centerX - y, centerY + x), Tile.at(centerX + y, centerY + x)));
+            tiles.addAll(generateTileRow(Tile.at(centerX - x, centerY + y), Tile.at(centerX + x, centerY + y)));
+            tiles.addAll(generateTileRow(Tile.at(centerX - x, centerY - y), Tile.at(centerX + x, centerY - y)));
+            tiles.addAll(generateTileRow(Tile.at(centerX - y, centerY - x), Tile.at(centerX + y, centerY - x)));
 
             if (d < 0) {
                 d += 2 * x + 1;
@@ -82,7 +82,7 @@ public class Circle implements Shape {
     private Set<Tile> generateTileRow(Tile from, Tile to) {
         Set<Tile> result = new HashSet<>();
         for (int x = from.getX(); x <= to.getX(); x++) {
-            result.add(new Tile(x, from.getY()));
+            result.add(Tile.at(x, from.getY()));
         }
 
         return result;

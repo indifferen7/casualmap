@@ -38,7 +38,7 @@ public class ShapesGenerator {
             int areaWidth = args.getMinAreaWidth() + random.nextInt(args.getMaxAreaWidth() - args.getMinAreaWidth()) + 1;
             int areaHeight = args.getMinAreaHeight() + random.nextInt(args.getMaxAreaHeight() - args.getMinAreaHeight()) + 1;
 
-            Shape shape = shapeFactory.create(new Tile(0, 0), areaWidth, areaHeight);
+            Shape shape = shapeFactory.create(Tile.at(0, 0), areaWidth, areaHeight);
 
             List<Shape> suggestions = LineUpSuggestor.newForShape(grid.anyShape()).suggest(shape);
 
@@ -73,7 +73,7 @@ public class ShapesGenerator {
         int areaWidth = args.getMinAreaWidth() + random.nextInt(args.getMaxAreaWidth() - args.getMinAreaWidth()) + 1;
         int areaHeight = args.getMinAreaHeight() + random.nextInt(args.getMaxAreaHeight() - args.getMinAreaHeight()) + 1;
 
-        Tile topLeft = new Tile(
+        Tile topLeft = Tile.at(
                 random.nextInt(args.getWidth() / 2),
                 random.nextInt(args.getHeight() / 2));
 

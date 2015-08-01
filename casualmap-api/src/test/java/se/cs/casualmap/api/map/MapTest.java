@@ -43,11 +43,11 @@ public class MapTest {
     public void getAreaByTile() {
         Map map = newMap();
 
-        Optional<Area> area = map.getArea(new Tile(0, 0));
+        Optional<Area> area = map.getArea(Tile.at(0, 0));
         assertTrue(area.isPresent());
         assertEquals(0, area.get().getId());
 
-        area = map.getArea(new Tile(42, 42));
+        area = map.getArea(Tile.at(42, 42));
         assertFalse(area.isPresent());
     }
 
@@ -61,13 +61,13 @@ public class MapTest {
          */
         Set<Area> areas = new HashSet<>();
 
-        areas.add(new Area(0, createRectangle(new Tile(0, 0), 2, 2)));
-        areas.add(new Area(1, createRectangle(new Tile(2, 0), 2, 2)));
-        areas.add(new Area(2, createRectangle(new Tile(1, 2), 2, 2)));
+        areas.add(new Area(0, createRectangle(Tile.at(0, 0), 2, 2)));
+        areas.add(new Area(1, createRectangle(Tile.at(2, 0), 2, 2)));
+        areas.add(new Area(2, createRectangle(Tile.at(1, 2), 2, 2)));
 
         Set<Passage> passages = new HashSet<>();
-        passages.add(new Passage(0, new Tile(1, 0), new Tile(2, 0)));
-        passages.add(new Passage(1, new Tile(2, 1), new Tile(2, 2)));
+        passages.add(new Passage(0, Tile.at(1, 0), Tile.at(2, 0)));
+        passages.add(new Passage(1, Tile.at(2, 1), Tile.at(2, 2)));
 
         return new Map(areas, passages, 4, 4);
     }
@@ -77,7 +77,7 @@ public class MapTest {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                tiles.add(new Tile(topLeft.getX() + x, topLeft.getY() + y));
+                tiles.add(Tile.at(topLeft.getX() + x, topLeft.getY() + y));
             }
         }
 

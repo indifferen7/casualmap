@@ -15,30 +15,30 @@ public class RectangleTest {
 
     @Test
     public void getTilesInDirection() {
-        Rectangle rect = new Rectangle(new Tile(0, 0), 2, 2);
+        Rectangle rect = new Rectangle(Tile.at(0, 0), 2, 2);
 
         Set<Tile> result = rect.getTiles(Direction.LEFT);
 
         assertEquals(2, result.size());
-        assertTrue(result.contains(new Tile(0, 0)));
-        assertTrue(result.contains(new Tile(0, 1)));
+        assertTrue(result.contains(Tile.at(0, 0)));
+        assertTrue(result.contains(Tile.at(0, 1)));
 
         result = rect.getTiles(Direction.DOWN);
 
         assertEquals(2, result.size());
-        assertTrue(result.contains(new Tile(0, 1)));
-        assertTrue(result.contains(new Tile(1, 1)));
+        assertTrue(result.contains(Tile.at(0, 1)));
+        assertTrue(result.contains(Tile.at(1, 1)));
 
         result = rect.getTiles(Direction.RIGHT);
 
         assertEquals(2, result.size());
-        assertTrue(result.contains(new Tile(1, 0)));
-        assertTrue(result.contains(new Tile(1, 1)));
+        assertTrue(result.contains(Tile.at(1, 0)));
+        assertTrue(result.contains(Tile.at(1, 1)));
 
         result = rect.getTiles(Direction.UP);
 
         assertEquals(2, result.size());
-        assertTrue(result.contains(new Tile(0, 0)));
-        assertTrue(result.contains(new Tile(1, 0)));
+        assertTrue(result.contains(Tile.at(0, 0)));
+        assertTrue(result.contains(Tile.at(1, 0)));
     }
 }
