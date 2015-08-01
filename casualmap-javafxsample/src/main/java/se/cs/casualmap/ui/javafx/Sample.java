@@ -149,17 +149,38 @@ public class Sample extends Application {
             }
         }
 
-        gc.setFill(Color.BROWN);
-        for (Passage passage : map.allPassages()) {
-            gc.fillRect(passage.tileOne().getX() * widthRatio,
-                    passage.tileOne().getY() * heightRatio,
-                    widthRatio,
-                    heightRatio);
 
-            gc.fillRect(passage.tileTwo().getX() * widthRatio,
-                    passage.tileTwo().getY() * heightRatio,
-                    widthRatio,
-                    heightRatio);
+        gc.setLineWidth(4);
+        gc.setStroke(Color.RED);
+        for (Passage passage : map.allPassages()) {
+            double fromX, toX, fromY, toY;
+
+            if (passage.tileOne().relativeTo(Direction.LEFT).equals(passage.tileTwo())) {
+                fromX = passage.tileOne().getX() * widthRatio;
+                toX = fromX;
+                fromY = passage.tileOne().getY() * heightRatio;
+                toY = fromY + heightRatio;
+            }
+            else if (passage.tileOne().relativeTo(Direction.DOWN).equals(passage.tileTwo())) {
+                fromX = passage.tileOne().getX() * widthRatio;
+                toX = fromX + widthRatio;
+                fromY = passage.tileOne().getY() * heightRatio + heightRatio;
+                toY = fromY;
+            }
+            else if (passage.tileOne().relativeTo(Direction.RIGHT).equals(passage.tileTwo())) {
+                fromX = passage.tileOne().getX() * widthRatio + widthRatio;
+                toX = fromX;
+                fromY = passage.tileOne().getY() * heightRatio;
+                toY = fromY + heightRatio;
+            }
+            else {
+                fromX = passage.tileOne().getX() * widthRatio;
+                toX = fromX + widthRatio;
+                fromY = passage.tileOne().getY() * heightRatio;
+                toY = fromY;
+            }
+
+            gc.strokeLine(fromX, fromY, toX, toY);
         }
     }
 }
