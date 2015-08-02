@@ -24,7 +24,7 @@ public class ShapesGenerator {
     }
 
     /**
-     * @return a collection of lined up shapes.
+     * @return a collection of lined up shapes
      */
     Collection<Shape> generate() {
         int attempts = 0;
