@@ -32,7 +32,7 @@ public class Grid {
     /**
      * Translates the grid, i.e. "moves" the grid coordinate system to the
      * specified tile.
-     * @param tile The translated top left tile.
+     * @param tile the translated top left tile
      */
     public void translate(Tile tile) {
         this.translation = tile;
