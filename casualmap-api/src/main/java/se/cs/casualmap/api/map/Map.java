@@ -4,10 +4,7 @@ import com.google.common.base.Optional;
 import se.cs.casualmap.api.shared.Direction;
 import se.cs.casualmap.api.shared.Tile;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -18,7 +15,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class Map {
     private final java.util.Map<Integer, Area> areaById = new HashMap<>();
-    private final java.util.Map<Tile, Area> areaByTile = new HashMap<>();
+    private transient final java.util.Map<Tile, Area> areaByTile = new HashMap<>();
     private final java.util.Map<Integer, Passage> passages = new HashMap<>();
 
     private final int width;
@@ -155,5 +152,21 @@ public class Map {
                 "width=" + width +
                 ", height=" + height +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Map map = (Map) o;
+        return Objects.equals(width, map.width) &&
+                Objects.equals(height, map.height) &&
+                Objects.equals(areaById, map.areaById) &&
+                Objects.equals(passages, map.passages);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(areaById, passages, width, height);
     }
 }
