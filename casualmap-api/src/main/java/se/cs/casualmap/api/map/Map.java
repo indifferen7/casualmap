@@ -14,9 +14,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * in a tile map. It provides all kinds of handy functions you might need.
  */
 public class Map {
-    private final java.util.Map<Integer, Area> areaById = new HashMap<>();
+    private final Set<Area> areas;
+    private final Set<Passage> passages;
+
+    private transient final java.util.Map<Integer, Area> areaById = new HashMap<>();
     private transient final java.util.Map<Tile, Area> areaByTile = new HashMap<>();
-    private final java.util.Map<Integer, Passage> passagesById = new HashMap<>();
+    private transient final java.util.Map<Integer, Passage> passagesById = new HashMap<>();
 
     private final int width;
     private final int height;
@@ -26,8 +29,8 @@ public class Map {
                int mapWidth,
                int mapHeight) {
 
-        checkNotNull(areas);
-        checkNotNull(passages);
+        this.areas = checkNotNull(areas);
+        this.passages = checkNotNull(passages);
         checkArgument(mapWidth > 1, "Map width too low: %s", mapWidth);
         checkArgument(mapHeight > 1, "Map height too low: %s", mapHeight);
 
@@ -161,12 +164,12 @@ public class Map {
         Map map = (Map) o;
         return Objects.equals(width, map.width) &&
                 Objects.equals(height, map.height) &&
-                Objects.equals(areaById, map.areaById) &&
-                Objects.equals(passagesById, map.passagesById);
+                Objects.equals(areas, map.areas) &&
+                Objects.equals(passages, map.passages);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(areaById, passagesById, width, height);
+        return Objects.hash(areas, passages, width, height);
     }
 }
