@@ -42,7 +42,7 @@ public class Main {
         factories.add(new Rectangle.Factory());
         factories.add(new Circle.Factory());
 
-        MapGenerator mapGenerator = new MapGenerator(new MapGeneratorArgs(), new RandomShapeFactory(factories));
+        MapGenerator mapGenerator = new MapGenerator(new MapGeneratorArgs.Builder().build(), new RandomShapeFactory(factories));
 
         return mapGenerator.generate();
     }

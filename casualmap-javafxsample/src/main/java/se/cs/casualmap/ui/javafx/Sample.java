@@ -57,7 +57,10 @@ public class Sample extends Application {
                 factories.add(new Rectangle.Factory());
                 factories.add(new Circle.Factory());
 
-                MapGenerator mapGenerator = new MapGenerator(new MapGeneratorArgs(), new RandomShapeFactory(factories));
+                MapGenerator mapGenerator =
+                        new MapGenerator(new MapGeneratorArgs.Builder().build(),
+                            new RandomShapeFactory(factories));
+
                 Map map = mapGenerator.generate();
 
                 draw(map, canvas, info);
