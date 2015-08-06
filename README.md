@@ -30,7 +30,11 @@ $ java -jar casualmap-generator-console.jar -f map.json
 If you have a JSON serialized map serialized to Json and want to make use of the map in Java you can add a dependency to the casualmap-api module to your code. The classes in this module allows you to load serialized maps into a nice API to query the data structure in all sorts of ways. Try it out! Naturally, as the serialized format is Json, the map can be used in pretty much any programming lanugage out there, so you're definately not limited to Java.
 
 ### c. Try out the JavaFX ui
-Right now the JavaFX ui is only for show but it looks cool. The plan is to make it more competent in terms of settings and input/output options. Right now all you can do is to generate maps to see what they look like. The following image is a screen shot from the primitive JavaFX sample module (as of 2015-08-01) that exists only to demonstrate how the map generation works. This will have to do for now.
+Right now the JavaFX ui is only for show but it looks cool. The plan is to make it more competent in terms of settings and input/output options. Right now all you can do is to generate maps to see what they look like. To run it, travel to casualmap-javafxsample/target and execute the command below: 
+
+$ java -jar casualmap-javafx.jar
+
+The following image is a screen shot from the primitive JavaFX sample module (as of 2015-08-01) that exists only to demonstrate how the map generation works. This will have to do for now.
 
 ![Super early version of the gui](https://dl.dropboxusercontent.com/u/404130/example.png)
 
