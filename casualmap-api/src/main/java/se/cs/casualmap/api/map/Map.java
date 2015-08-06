@@ -16,7 +16,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class Map {
     private final java.util.Map<Integer, Area> areaById = new HashMap<>();
     private transient final java.util.Map<Tile, Area> areaByTile = new HashMap<>();
-    private final java.util.Map<Integer, Passage> passages = new HashMap<>();
+    private final java.util.Map<Integer, Passage> passagesById = new HashMap<>();
 
     private final int width;
     private final int height;
@@ -40,7 +40,7 @@ public class Map {
         }
 
         for (Passage passage : passages) {
-            this.passages.put(passage.getId(), passage);
+            this.passagesById.put(passage.getId(), passage);
         }
 
         this.width = mapWidth;
@@ -63,7 +63,7 @@ public class Map {
     }
 
     /**
-     * @param id a tile that should exist within the sought area
+     * @param tile a tile that should exist within the sought area
      * @return an optional wrapper with the result of the query
      */
     public Optional<Area> areaWithTile(Tile tile) {
@@ -74,7 +74,7 @@ public class Map {
      * @return all passages in the map
      */
     public Collection<Passage> allPassages() {
-        return passages.values();
+        return passagesById.values();
     }
 
     /**
@@ -82,7 +82,7 @@ public class Map {
      * @return an optional wrapper with the result of the query
      */
     public Optional<Passage> passageWithId(int id) {
-        return Optional.fromNullable(passages.get(id));
+        return Optional.fromNullable(passagesById.get(id));
     }
 
     /**
@@ -92,7 +92,7 @@ public class Map {
     public Collection<Passage> passagesAt(Area area) {
         Collection<Passage> result = new ArrayList<>();
 
-        for (Passage passage : passages.values()) {
+        for (Passage passage : passagesById.values()) {
             Optional<Area> candidateA = areaWithTile(passage.tileOne());
             Optional<Area> candidateB = areaWithTile(passage.tileTwo());
 
@@ -162,11 +162,11 @@ public class Map {
         return Objects.equals(width, map.width) &&
                 Objects.equals(height, map.height) &&
                 Objects.equals(areaById, map.areaById) &&
-                Objects.equals(passages, map.passages);
+                Objects.equals(passagesById, map.passagesById);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(areaById, passages, width, height);
+        return Objects.hash(areaById, passagesById, width, height);
     }
 }

@@ -1,17 +1,15 @@
-package se.cs.casualmap.io;
+package se.cs.casualmap.api.io;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import se.cs.casualmap.api.io.MapReader;
+import se.cs.casualmap.api.TestObjectFactory;
 import se.cs.casualmap.api.map.Map;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
-import static se.cs.casualmap.TestObjectFactory.newMap;
 
 public class MapFileWriterTest {
 
@@ -22,7 +20,7 @@ public class MapFileWriterTest {
     public void write() throws IOException {
         File file = folder.newFile();
 
-        Map map1 = newMap();
+        Map map1 = TestObjectFactory.newMap();
         Map map2 = null;
 
         MapFileWriter writer = MapFileWriter.forMap(map1);

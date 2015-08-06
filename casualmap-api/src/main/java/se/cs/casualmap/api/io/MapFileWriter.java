@@ -1,4 +1,4 @@
-package se.cs.casualmap.io;
+package se.cs.casualmap.api.io;
 
 import se.cs.casualmap.api.map.Map;
 

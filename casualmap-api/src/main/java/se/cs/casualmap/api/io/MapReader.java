@@ -1,7 +1,6 @@
 package se.cs.casualmap.api.io;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import se.cs.casualmap.api.map.Map;
 
 import java.io.IOException;

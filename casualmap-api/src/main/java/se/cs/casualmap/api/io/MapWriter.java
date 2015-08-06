@@ -1,4 +1,4 @@
-package se.cs.casualmap.io;
+package se.cs.casualmap.api.io;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
