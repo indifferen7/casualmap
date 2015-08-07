@@ -1,12 +1,14 @@
 package se.cs.casualmap.generator;
 
-import se.cs.casualmap.shape.Shape;
-import se.cs.casualmap.shape.ShapeFactory;
+import se.cs.casualmap.shape.*;
 import se.cs.casualmap.api.map.Area;
 import se.cs.casualmap.api.map.Map;
 import se.cs.casualmap.api.map.Passage;
 
 import java.util.*;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * This class generates {@link Map} instances based on the enclosed {@link Args}.
@@ -15,13 +17,17 @@ public class MapGenerator {
     private final Args args;
     private final ShapeFactory<? extends Shape> shapeFactory;
 
-    public MapGenerator(Args args,
+    private MapGenerator(Args args,
                         ShapeFactory<? extends Shape> shapeFactory) {
         this.args = args;
         this.shapeFactory = shapeFactory;
     }
 
-    public Map generate() {
+    public static Builder newBuilder() {
+        return new Builder();
+    }
+
+    private Map generate() {
         Collection<Shape> shapes = new ShapesGenerator(args, shapeFactory).generate();
         Set<Connection> connections = new ConnectionGenerator(shapes).generate();
 
@@ -48,5 +54,45 @@ public class MapGenerator {
         }
 
         return result;
+    }
+
+    public static class Builder {
+        private Collection<ShapeFactory<? extends Shape>> factories = new ArrayList<>();
+        private Args args;
+
+        private Builder() {}
+
+        public Builder withShapeFactory(ShapeFactory<? extends Shape> factory) {
+            checkNotNull(factory);
+            checkArgument(!(factory instanceof RandomShapeFactory), "RandomShapeFactory cannot be added");
+
+            factories.add(factory);
+
+            return this;
+        }
+
+        public Builder withArgs(Args args) {
+            this.args = checkNotNull(args);
+
+            return this;
+        }
+
+        public Map generate() {
+            List<ShapeFactory<? extends Shape>> theFactories = new ArrayList<>();
+
+            if (this.factories.isEmpty()) {
+                theFactories.add(new Rectangle.Factory());
+                theFactories.add(new Circle.Factory());
+            } else {
+                theFactories.addAll(factories);
+            }
+
+            Args theArgs = args != null
+                    ? args
+                    : Args.newBuilder().build();
+
+            return new MapGenerator(theArgs,
+                    new RandomShapeFactory(theFactories)).generate();
+        }
     }
 }

@@ -1,7 +1,7 @@
 package se.cs.casualmap.generator;
 
 /**
- * Map generator args, not very flexible at the moment.. ;)
+ * Map generator args.
  */
 public class Args {
 

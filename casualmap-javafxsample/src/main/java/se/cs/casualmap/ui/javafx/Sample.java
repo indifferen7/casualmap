@@ -14,14 +14,14 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import se.cs.casualmap.generator.MapGenerator;
-import se.cs.casualmap.generator.Args;
-import se.cs.casualmap.shape.*;
-import se.cs.casualmap.api.map.Passage;
-import se.cs.casualmap.api.shared.Tile;
-import se.cs.casualmap.api.map.Map;
 import se.cs.casualmap.api.map.Area;
+import se.cs.casualmap.api.map.Map;
+import se.cs.casualmap.api.map.Passage;
 import se.cs.casualmap.api.shared.Direction;
+import se.cs.casualmap.api.shared.Tile;
+import se.cs.casualmap.generator.Args;
+import se.cs.casualmap.generator.MapGenerator;
+import se.cs.casualmap.shape.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,11 +57,10 @@ public class Sample extends Application {
                 factories.add(new Rectangle.Factory());
                 factories.add(new Circle.Factory());
 
-                MapGenerator mapGenerator =
-                        new MapGenerator(Args.newBuilder().build(),
-                            new RandomShapeFactory(factories));
-
-                Map map = mapGenerator.generate();
+                Map map = MapGenerator.newBuilder()
+                        .withArgs(Args.newBuilder().build())
+                        .withShapeFactory(new RandomShapeFactory(factories))
+                        .generate();
 
                 draw(map, canvas, info);
             }

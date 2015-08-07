@@ -42,9 +42,9 @@ public class Main {
         factories.add(new Rectangle.Factory());
         factories.add(new Circle.Factory());
 
-        MapGenerator mapGenerator =
-                new MapGenerator(Args.newBuilder().build(), new RandomShapeFactory(factories));
-
-        return mapGenerator.generate();
+        return MapGenerator.newBuilder()
+                .withArgs(Args.newBuilder().build())
+                .withShapeFactory(new RandomShapeFactory(factories))
+                .generate();
     }
 }
