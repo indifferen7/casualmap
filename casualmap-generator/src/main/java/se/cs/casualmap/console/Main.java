@@ -11,9 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
-/**
- * Created by indifferent on 8/6/15.
- */
 public class Main {
 
     public static void main(String[] args) throws ParseException, IOException {
@@ -24,13 +21,19 @@ public class Main {
         options.addOption("areaHeight", true, "the height of areas in the map in format min[,max]. If the latter is omitted both will be set to the provided value.");
 
         CommandLineParser parser = new DefaultParser();
-        CommandLine cmd = parser.parse(options, args);
 
-        Map map = generate(cmd);
-        if (cmd.hasOption("f") && cmd.getOptionValue("f") != null) {
-            MapFileWriter.forMap(map).write(new File(cmd.getOptionValue("f")));
-        } else {
-            MapWriter.forMap(map).write(System.out);
+        try {
+            CommandLine cmd = parser.parse(options, args);
+
+            Map map = generate(cmd);
+
+            if (cmd.hasOption("f") && cmd.getOptionValue("f") != null) {
+                MapFileWriter.forMap(map).write(new File(cmd.getOptionValue("f")));
+            } else {
+                MapWriter.forMap(map).write(System.out);
+            }
+        } catch (Exception e) {
+            System.out.println("Oops: " + e.getMessage());
         }
     }
 
