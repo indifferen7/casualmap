@@ -5,7 +5,7 @@ import se.cs.casualmap.api.io.MapFileWriter;
 import se.cs.casualmap.api.io.MapWriter;
 import se.cs.casualmap.api.map.Map;
 import se.cs.casualmap.generator.MapGenerator;
-import se.cs.casualmap.generator.MapGeneratorArgs;
+import se.cs.casualmap.generator.Args;
 import se.cs.casualmap.shape.*;
 
 import java.io.File;
@@ -42,7 +42,8 @@ public class Main {
         factories.add(new Rectangle.Factory());
         factories.add(new Circle.Factory());
 
-        MapGenerator mapGenerator = new MapGenerator(new MapGeneratorArgs.Builder().build(), new RandomShapeFactory(factories));
+        MapGenerator mapGenerator =
+                new MapGenerator(Args.newBuilder().build(), new RandomShapeFactory(factories));
 
         return mapGenerator.generate();
     }

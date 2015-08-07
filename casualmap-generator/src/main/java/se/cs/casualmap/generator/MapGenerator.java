@@ -9,13 +9,13 @@ import se.cs.casualmap.api.map.Passage;
 import java.util.*;
 
 /**
- * This class generates {@link Map} instances based on the enclosed {@link MapGeneratorArgs}.
+ * This class generates {@link Map} instances based on the enclosed {@link Args}.
  */
 public class MapGenerator {
-    private final MapGeneratorArgs args;
+    private final Args args;
     private final ShapeFactory<? extends Shape> shapeFactory;
 
-    public MapGenerator(MapGeneratorArgs args,
+    public MapGenerator(Args args,
                         ShapeFactory<? extends Shape> shapeFactory) {
         this.args = args;
         this.shapeFactory = shapeFactory;

@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import se.cs.casualmap.generator.MapGenerator;
-import se.cs.casualmap.generator.MapGeneratorArgs;
+import se.cs.casualmap.generator.Args;
 import se.cs.casualmap.shape.*;
 import se.cs.casualmap.api.map.Passage;
 import se.cs.casualmap.api.shared.Tile;
@@ -58,7 +58,7 @@ public class Sample extends Application {
                 factories.add(new Circle.Factory());
 
                 MapGenerator mapGenerator =
-                        new MapGenerator(new MapGeneratorArgs.Builder().build(),
+                        new MapGenerator(Args.newBuilder().build(),
                             new RandomShapeFactory(factories));
 
                 Map map = mapGenerator.generate();

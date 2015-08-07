@@ -3,7 +3,7 @@ package se.cs.casualmap.generator;
 /**
  * Map generator args, not very flexible at the moment.. ;)
  */
-public class MapGeneratorArgs {
+public class Args {
 
     private final int width;
     private final int height;
@@ -13,9 +13,9 @@ public class MapGeneratorArgs {
     private final int maxAreaWidth;
     private final double tileDensityThreshold;
 
-    private MapGeneratorArgs(int width, int height, int minAreaHeight,
-                            int maxAreaHeight, int minAreaWidth,
-                            int maxAreaWidth, double tileDensityThreshold) {
+    private Args(int width, int height, int minAreaHeight,
+                 int maxAreaHeight, int minAreaWidth,
+                 int maxAreaWidth, double tileDensityThreshold) {
         this.width = width;
         this.height = height;
         this.minAreaHeight = minAreaHeight;
@@ -23,6 +23,10 @@ public class MapGeneratorArgs {
         this.minAreaWidth = minAreaWidth;
         this.maxAreaWidth = maxAreaWidth;
         this.tileDensityThreshold = tileDensityThreshold;
+    }
+
+    public static Builder newBuilder() {
+        return new Args.Builder();
     }
 
     public int getWidth() {
@@ -62,6 +66,8 @@ public class MapGeneratorArgs {
         private int maxAreaWidth = 12;
         private double tileDensityThreshold = .5;
 
+        private Builder() {}
+
         public Builder width(int width) {
             this.width = width;
             return this;
@@ -82,23 +88,23 @@ public class MapGeneratorArgs {
             return this;
         }
 
-        public Builder setMinAreaWidth(int minAreaWidth) {
+        public Builder minAreaWidth(int minAreaWidth) {
             this.minAreaWidth = minAreaWidth;
             return this;
         }
 
-        public Builder setMaxAreaWidth(int maxAreaWidth) {
+        public Builder maxAreaWidth(int maxAreaWidth) {
             this.maxAreaWidth = maxAreaWidth;
             return this;
         }
 
-        public Builder setTileDensityThreshold(double tileDensityThreshold) {
+        public Builder tileDensityThreshold(double tileDensityThreshold) {
             this.tileDensityThreshold = tileDensityThreshold;
             return this;
         }
 
-        public MapGeneratorArgs build() {
-            return new MapGeneratorArgs(width, height, minAreaHeight, maxAreaHeight,
+        public Args build() {
+            return new Args(width, height, minAreaHeight, maxAreaHeight,
                     minAreaWidth, maxAreaWidth, tileDensityThreshold);
         }
     }
