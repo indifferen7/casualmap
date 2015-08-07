@@ -49,8 +49,18 @@ public class ShapesGenerator {
         while (!hasFailedTooManyTimes(attempts)
                 && !tileDensityThresholdReached(grid)) {
 
-            int areaWidth = args.getMinAreaWidth() + random.nextInt(args.getMaxAreaWidth() - args.getMinAreaWidth()) + 1;
-            int areaHeight = args.getMinAreaHeight() + random.nextInt(args.getMaxAreaHeight() - args.getMinAreaHeight()) + 1;
+            int widthModifier = 0;
+            if (args.getMaxAreaWidth() - args.getMinAreaWidth() > 0) {
+                widthModifier = random.nextInt(args.getMaxAreaWidth() - args.getMinAreaWidth()) + 1;
+            }
+
+            int heightModifier = 0;
+            if (args.getMaxAreaHeight() - args.getMinAreaHeight() > 0) {
+                heightModifier = random.nextInt(args.getMaxAreaHeight() - args.getMinAreaHeight()) + 1;
+            }
+
+            int areaWidth = args.getMinAreaWidth() + widthModifier;
+            int areaHeight = args.getMinAreaHeight() + heightModifier;
 
             Shape shape = shapeFactory.create(Tile.at(0, 0), areaWidth, areaHeight);
 
