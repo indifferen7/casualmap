@@ -48,6 +48,11 @@ public class ConnectionGenerator {
         }
 
         while (true) {
+            if (result.size() < 2) {
+                // no regions to connect
+                break;
+            }
+
             Set<Shape> region = getShapesConnectedWith(shapes.iterator().next(), result);
 
             if (region.size() == shapes.size())

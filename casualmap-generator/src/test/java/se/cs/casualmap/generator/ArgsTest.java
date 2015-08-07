@@ -12,7 +12,7 @@ public class ArgsTest {
         Args.newBuilder()
                 .minAreaWidth(4)
                 .maxAreaWidth(4)
-                .width(3).build();
+                .width(1).build();
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -20,7 +20,7 @@ public class ArgsTest {
         Args.newBuilder()
                 .minAreaHeight(4)
                 .maxAreaHeight(4)
-                .height(3).build();
+                .height(1).build();
     }
 
     @Test(expected = IllegalArgumentException.class)

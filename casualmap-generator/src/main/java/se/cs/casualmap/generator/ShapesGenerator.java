@@ -1,9 +1,13 @@
 package se.cs.casualmap.generator;
 
-import se.cs.casualmap.shape.*;
 import se.cs.casualmap.api.shared.Tile;
+import se.cs.casualmap.shape.Shape;
+import se.cs.casualmap.shape.ShapeFactory;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 /**
  * This class generates lined up {@link Shape}s based on the provided {@link Args}.
@@ -16,7 +20,7 @@ public class ShapesGenerator {
     private final Random random = new Random();
     private final ShapeFactory<?> shapeFactory;
 
-    private int maxAttempts = 2000;
+    private int maxAttempts = 3000;
 
     ShapesGenerator(Args args, ShapeFactory<? extends Shape> shapeFactory) {
         this.args = args;
@@ -30,7 +34,17 @@ public class ShapesGenerator {
         int attempts = 0;
 
         Grid grid = new Grid(args.getWidth(), args.getHeight());
-        grid.place(newShape());
+        while (!hasFailedTooManyTimes(attempts)) {
+            Shape first = newShape();
+
+            if (grid.fits(first)) {
+                attempts = 0;
+                grid.place(first);
+                break;
+            } else {
+                attempts++;
+            }
+        }
 
         while (!hasFailedTooManyTimes(attempts)
                 && !tileDensityThresholdReached(grid)) {
@@ -55,6 +69,12 @@ public class ShapesGenerator {
             }
         }
 
+        // todo: think about whether or not to enforce this rule..
+        /*
+        checkArgument(!hasFailedTooManyTimes(attempts),
+                "Could not generate map after %s attempts, please check your arguments.", attempts);
+        */
+
         return grid.getShapes();
     }
 
@@ -70,12 +90,24 @@ public class ShapesGenerator {
     }
 
     private Shape newShape() {
-        int areaWidth = args.getMinAreaWidth() + random.nextInt(args.getMaxAreaWidth() - args.getMinAreaWidth()) + 1;
-        int areaHeight = args.getMinAreaHeight() + random.nextInt(args.getMaxAreaHeight() - args.getMinAreaHeight()) + 1;
+
+        int widthModifier = 0;
+        if (args.getMaxAreaWidth() - args.getMinAreaWidth() > 0) {
+            widthModifier = random.nextInt(args.getMaxAreaWidth() - args.getMinAreaWidth()) + 1;
+        }
+
+        int heightModifier = 0;
+        if (args.getMaxAreaHeight() - args.getMinAreaHeight() > 0) {
+            heightModifier = random.nextInt(args.getMaxAreaHeight() - args.getMinAreaHeight()) + 1;
+        }
+
+
+        int areaWidth = args.getMinAreaWidth() + widthModifier;
+        int areaHeight = args.getMinAreaHeight() + heightModifier;
 
         Tile topLeft = Tile.at(
-                random.nextInt(args.getWidth() / 2),
-                random.nextInt(args.getHeight() / 2));
+                random.nextInt(args.getWidth()),
+                random.nextInt(args.getHeight()));
 
         return shapeFactory.create(topLeft, areaWidth, areaHeight);
     }

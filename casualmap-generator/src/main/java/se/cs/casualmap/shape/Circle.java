@@ -88,6 +88,15 @@ public class Circle implements Shape {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Circle{" +
+                "topLeft=" + topLeft +
+                ", width=" + width +
+                ", height=" + height +
+                '}';
+    }
+
     public static class Factory implements ShapeFactory<Circle> {
 
         @Override

@@ -52,17 +52,7 @@ public class Sample extends Application {
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
             public void handle(ActionEvent event) {
-
-                List<ShapeFactory<? extends Shape>> factories = new ArrayList<>();
-                factories.add(new Rectangle.Factory());
-                factories.add(new Circle.Factory());
-
-                Map map = MapGenerator.newBuilder()
-                        .withArgs(Args.newBuilder().build())
-                        .withShapeFactory(new RandomShapeFactory(factories))
-                        .generate();
-
-                draw(map, canvas, info);
+                draw(MapGenerator.newBuilder().generate(), canvas, info);
             }
         });
 

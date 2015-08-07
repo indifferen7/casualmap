@@ -19,8 +19,8 @@ public class Args {
                  int maxAreaHeight, int minAreaWidth,
                  int maxAreaWidth, double tileDensityThreshold) {
 
-        checkArgument(width > 3, "Expected map at least to be 4 tiles wide, got %s", width);
-        checkArgument(height > 3, "Expected map at least to be 4 tiles high, got %s", height);
+        checkArgument(width > 1, "Expected map to be at least 2 tiles wide, got %s", width);
+        checkArgument(height > 1, "Expected map to be at least 2 tiles high, got %s", height);
         checkArgument(minAreaWidth <= maxAreaWidth,
                 "Minimum area width (%s) exceeds maximum area width (%s)", minAreaWidth, maxAreaWidth);
         checkArgument(minAreaHeight <= maxAreaHeight,
