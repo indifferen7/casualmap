@@ -64,7 +64,7 @@ public class MapGenerator {
 
         public Builder withShapeFactory(ShapeFactory<? extends Shape> factory) {
             checkNotNull(factory);
-            checkArgument(!(factory instanceof RandomShapeFactory), "RandomShapeFactory cannot be added");
+            checkArgument(!factories.contains(factory));
 
             factories.add(factory);
 
