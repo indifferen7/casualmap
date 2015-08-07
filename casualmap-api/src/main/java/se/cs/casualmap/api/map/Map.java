@@ -17,10 +17,6 @@ public class Map {
     private final Set<Area> areas;
     private final Set<Passage> passages;
 
-    private transient final java.util.Map<Integer, Area> areaById = new HashMap<>();
-    private transient final java.util.Map<Tile, Area> areaByTile = new HashMap<>();
-    private transient final java.util.Map<Integer, Passage> passagesById = new HashMap<>();
-
     private final int width;
     private final int height;
 
@@ -34,17 +30,6 @@ public class Map {
         checkArgument(mapWidth > 1, "Map width too low: %s", mapWidth);
         checkArgument(mapHeight > 1, "Map height too low: %s", mapHeight);
 
-        for (Area area : areas) {
-            this.areaById.put(area.getId(), area);
-
-            for (Tile tile : area.allTiles()) {
-                this.areaByTile.put(tile, area);
-            }
-        }
-
-        for (Passage passage : passages) {
-            this.passagesById.put(passage.getId(), passage);
-        }
 
         this.width = mapWidth;
         this.height = mapHeight;
@@ -54,7 +39,7 @@ public class Map {
      * @return all areas in the map
      */
     public Collection<Area> allAreas() {
-        return areaById.values();
+        return Collections.unmodifiableCollection(areas);
     }
 
     /**
@@ -62,7 +47,13 @@ public class Map {
      * @return an optional wrapper with the result of the query
      */
     public Optional<Area> areaWithId(int id) {
-        return Optional.fromNullable(areaById.get(id));
+        for (Area area : areas) {
+            if (area.getId() == id) {
+                return Optional.of(area);
+            }
+        }
+
+        return Optional.absent();
     }
 
     /**
@@ -70,14 +61,19 @@ public class Map {
      * @return an optional wrapper with the result of the query
      */
     public Optional<Area> areaWithTile(Tile tile) {
-        return Optional.fromNullable(areaByTile.get(tile));
+        for (Area area : areas) {
+            if (area.allTiles().contains(tile)) {
+                return Optional.of(area);
+            }
+        }
+        return Optional.absent();
     }
 
     /**
      * @return all passages in the map
      */
     public Collection<Passage> allPassages() {
-        return passagesById.values();
+        return Collections.unmodifiableCollection(passages);
     }
 
     /**
@@ -85,7 +81,13 @@ public class Map {
      * @return an optional wrapper with the result of the query
      */
     public Optional<Passage> passageWithId(int id) {
-        return Optional.fromNullable(passagesById.get(id));
+        for (Passage passage : passages) {
+            if (passage.getId() == id) {
+                return Optional.of(passage);
+            }
+        }
+
+        return Optional.absent();
     }
 
     /**
@@ -95,7 +97,7 @@ public class Map {
     public Collection<Passage> passagesAt(Area area) {
         Collection<Passage> result = new ArrayList<>();
 
-        for (Passage passage : passagesById.values()) {
+        for (Passage passage : passages) {
             Optional<Area> candidateA = areaWithTile(passage.tileOne());
             Optional<Area> candidateB = areaWithTile(passage.tileTwo());
 

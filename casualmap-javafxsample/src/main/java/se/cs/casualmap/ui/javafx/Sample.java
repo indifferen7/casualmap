@@ -14,17 +14,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import se.cs.casualmap.api.io.MapReader;
 import se.cs.casualmap.api.map.Area;
 import se.cs.casualmap.api.map.Map;
 import se.cs.casualmap.api.map.Passage;
 import se.cs.casualmap.api.shared.Direction;
 import se.cs.casualmap.api.shared.Tile;
-import se.cs.casualmap.generator.Args;
 import se.cs.casualmap.generator.MapGenerator;
-import se.cs.casualmap.shape.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Sample extends Application {
 
@@ -34,6 +30,7 @@ public class Sample extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         primaryStage.setTitle("Sample map generator");
 
         Text title = new Text();
@@ -49,8 +46,12 @@ public class Sample extends Application {
 
         final Canvas canvas = new Canvas(600, 600);
 
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        if (getParameters().getNamed().containsKey("f") && getParameters().getNamed().get("f") != null) {
+            Map map = new MapReader().read(getParameters().getNamed().get("f"));
+            draw(map, canvas, info);
+        }
 
+        btn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 draw(MapGenerator.newBuilder().generate(), canvas, info);
             }
