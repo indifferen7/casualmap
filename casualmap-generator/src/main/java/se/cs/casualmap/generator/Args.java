@@ -1,5 +1,7 @@
 package se.cs.casualmap.generator;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * Map generator args.
  */
@@ -16,6 +18,20 @@ public class Args {
     private Args(int width, int height, int minAreaHeight,
                  int maxAreaHeight, int minAreaWidth,
                  int maxAreaWidth, double tileDensityThreshold) {
+
+        checkArgument(width > 3, "Expected map at least to be 4 tiles wide, got %s", width);
+        checkArgument(height > 3, "Expected map at least to be 4 tiles high, got %s", height);
+        checkArgument(minAreaWidth <= maxAreaWidth,
+                "Minimum area width (%s) exceeds maximum area width (%s)", minAreaWidth, maxAreaWidth);
+        checkArgument(minAreaHeight <= maxAreaHeight,
+                "Minimum area height (%s) exceeds maximum area height (%s)", minAreaHeight, maxAreaHeight);
+        checkArgument(width >= maxAreaWidth,
+                "Map width (%s) must be greater than the maximum area width (%s)", width, maxAreaWidth);
+        checkArgument(height >= maxAreaHeight,
+                "Map height (%s) must be greater than the maximum area height (%s)", height, maxAreaHeight);
+        checkArgument(tileDensityThreshold > 0 && tileDensityThreshold <= 1,
+                "Tile density threshold must be somewhere between 0 and 1");
+
         this.width = width;
         this.height = height;
         this.minAreaHeight = minAreaHeight;
