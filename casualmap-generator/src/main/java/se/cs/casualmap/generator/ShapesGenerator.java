@@ -49,22 +49,13 @@ public class ShapesGenerator {
         while (!hasFailedTooManyTimes(attempts)
                 && !tileDensityThresholdReached(grid)) {
 
-            int widthModifier = 0;
-            if (args.getMaxAreaWidth() - args.getMinAreaWidth() > 0) {
-                widthModifier = random.nextInt(args.getMaxAreaWidth() - args.getMinAreaWidth()) + 1;
-            }
+            Shape shape = shapeFactory.create(
+                    Tile.at(0, 0),
+                    randomAreaWidth(),
+                    randomAreaHeight());
 
-            int heightModifier = 0;
-            if (args.getMaxAreaHeight() - args.getMinAreaHeight() > 0) {
-                heightModifier = random.nextInt(args.getMaxAreaHeight() - args.getMinAreaHeight()) + 1;
-            }
-
-            int areaWidth = args.getMinAreaWidth() + widthModifier;
-            int areaHeight = args.getMinAreaHeight() + heightModifier;
-
-            Shape shape = shapeFactory.create(Tile.at(0, 0), areaWidth, areaHeight);
-
-            List<Shape> suggestions = LineUpSuggestor.newForShape(grid.anyShape()).suggest(shape);
+            List<Shape> suggestions =
+                    LineUpSuggestor.newForShape(grid.anyShape()).suggest(shape);
 
             Collections.shuffle(suggestions);
 
@@ -100,25 +91,29 @@ public class ShapesGenerator {
     }
 
     private Shape newShape() {
+        return shapeFactory.create(
+                Tile.at(
+                        random.nextInt(args.getWidth()),
+                        random.nextInt(args.getHeight())),
+                randomAreaWidth(),
+                randomAreaHeight());
+    }
 
+    private int randomAreaWidth() {
         int widthModifier = 0;
         if (args.getMaxAreaWidth() - args.getMinAreaWidth() > 0) {
             widthModifier = random.nextInt(args.getMaxAreaWidth() - args.getMinAreaWidth()) + 1;
         }
 
+        return args.getMinAreaWidth() + widthModifier;
+    }
+
+    private int randomAreaHeight() {
         int heightModifier = 0;
         if (args.getMaxAreaHeight() - args.getMinAreaHeight() > 0) {
             heightModifier = random.nextInt(args.getMaxAreaHeight() - args.getMinAreaHeight()) + 1;
         }
 
-
-        int areaWidth = args.getMinAreaWidth() + widthModifier;
-        int areaHeight = args.getMinAreaHeight() + heightModifier;
-
-        Tile topLeft = Tile.at(
-                random.nextInt(args.getWidth()),
-                random.nextInt(args.getHeight()));
-
-        return shapeFactory.create(topLeft, areaWidth, areaHeight);
+        return args.getMinAreaHeight() + heightModifier;
     }
 }
