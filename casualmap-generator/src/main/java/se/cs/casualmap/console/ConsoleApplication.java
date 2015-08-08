@@ -6,12 +6,15 @@ import se.cs.casualmap.api.io.MapWriter;
 import se.cs.casualmap.api.map.Map;
 import se.cs.casualmap.generator.Args;
 import se.cs.casualmap.generator.MapGenerator;
+import se.cs.casualmap.shape.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-public class Main {
+public class ConsoleApplication {
 
     public static void main(String[] args) throws ParseException, IOException {
         Options options = new Options();
@@ -19,6 +22,7 @@ public class Main {
         options.addOption("size", true, "size of map in format width[,height]. If the latter is omitted both will be set to the provided value.");
         options.addOption("areaWidth", true, "the width of areas in the map in format min[,max]. If the latter is omitted both will be set to the provided value.");
         options.addOption("areaHeight", true, "the height of areas in the map in format min[,max]. If the latter is omitted both will be set to the provided value.");
+        options.addOption("shapes", true, "the shapes that the map should contain in format shape1[,shape2]. Supported shape values as of today are RECTANGLE and CIRCLE.");
 
         CommandLineParser parser = new DefaultParser();
 
@@ -37,10 +41,6 @@ public class Main {
         }
     }
 
-    /**
-     * The map generation should be a bit more flexible..
-     * @return a generated map
-     */
     private static Map generate(CommandLine cmd) {
 
         Args.Builder argsBuilder = Args.newBuilder();
@@ -84,9 +84,30 @@ public class Main {
             }
         }
 
-        return MapGenerator.newBuilder()
-                .withArgs(argsBuilder.build())
-                .generate();
+        MapGenerator.Builder mapBuilder =
+                MapGenerator.newBuilder()
+                        .withArgs(argsBuilder.build());
+
+        Optional<String[]> shapes = getRangeValue(cmd, "shapes");
+        if (shapes.isPresent()) {
+            List<ShapeFactory<? extends Shape>> factories = new ArrayList<>();
+
+            // this part could definitely be improved, e.g. with an enum
+            for (String shape : shapes.get()) {
+                if (shape.toUpperCase().equals("RECTANGLE")) {
+                    factories.add(new Rectangle.Factory());
+                }
+                else if (shape.toUpperCase().equals("CIRCLE")) {
+                    factories.add(new Circle.Factory());
+                }
+            }
+
+            if (!factories.isEmpty()) {
+                mapBuilder.withShapeFactory(new RandomShapeFactory(factories));
+            }
+        }
+
+        return mapBuilder.generate();
     }
 
     private static Optional<String[]> getRangeValue(CommandLine cmd, String option) {

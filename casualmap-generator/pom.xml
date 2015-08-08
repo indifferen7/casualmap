@@ -22,7 +22,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>se.cs.casualmap.console.Main</mainClass>
+                            <mainClass>se.cs.casualmap.console.ConsoleApplication</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

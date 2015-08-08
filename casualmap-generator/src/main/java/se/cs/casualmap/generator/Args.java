@@ -80,7 +80,7 @@ public class Args {
         private int maxAreaHeight = 12;
         private int minAreaWidth = 6;
         private int maxAreaWidth = 12;
-        private double tileDensityThreshold = .5;
+        private double tileDensityThreshold = .7;
 
         private Builder() {}
 
