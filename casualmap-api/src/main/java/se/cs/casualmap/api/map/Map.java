@@ -1,6 +1,5 @@
 package se.cs.casualmap.api.map;
 
-import com.google.common.base.Optional;
 import se.cs.casualmap.api.shared.Direction;
 import se.cs.casualmap.api.shared.Tile;
 
@@ -53,7 +52,7 @@ public class Map {
             }
         }
 
-        return Optional.absent();
+        return Optional.empty();
     }
 
     /**
@@ -66,7 +65,7 @@ public class Map {
                 return Optional.of(area);
             }
         }
-        return Optional.absent();
+        return Optional.empty();
     }
 
     /**
@@ -87,7 +86,7 @@ public class Map {
             }
         }
 
-        return Optional.absent();
+        return Optional.empty();
     }
 
     /**

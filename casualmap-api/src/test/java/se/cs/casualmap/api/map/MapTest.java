@@ -1,12 +1,12 @@
 package se.cs.casualmap.api.map;
 
-import com.google.common.base.Optional;
 import org.junit.Test;
 import se.cs.casualmap.api.shared.Direction;
 import se.cs.casualmap.api.shared.Tile;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
