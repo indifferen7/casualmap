@@ -22,6 +22,8 @@ import se.cs.casualmap.api.shared.Direction;
 import se.cs.casualmap.api.shared.Tile;
 import se.cs.casualmap.generator.MapGenerator;
 
+import java.nio.file.Paths;
+
 public class Sample extends Application {
 
     public static void main(String[] args) {
@@ -44,13 +46,7 @@ public class Sample extends Application {
         final Text info = new Text();
         title.setText("Sample map generator");
 
-        final Canvas canvas = new Canvas(600, 600);
-
-        if (getParameters().getNamed().containsKey("f") && getParameters().getNamed().get("f") != null) {
-            Map map = new MapReader().read(getParameters().getNamed().get("f"));
-            draw(map, canvas, info);
-        }
-
+        final Canvas canvas = new Canvas();
         btn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 draw(MapGenerator.newBuilder().generate(), canvas, info);
@@ -75,9 +71,29 @@ public class Sample extends Application {
         root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root, 1000, 800));
         primaryStage.show();
+
+        if (getParameters().getNamed().containsKey("f") && getParameters().getNamed().get("f") != null) {
+            Map map = new MapReader().read(Paths.get(getParameters().getNamed().get("f")));
+            draw(map, canvas, info);
+        }
+
+
     }
 
     private void draw(Map map, Canvas canvas, final Text info) {
+        double width = 600;
+        double height = 600;
+
+        if (map.width() > map.height()) {
+            height = ((double) map.height() / (double) map.width()) * width;
+        }
+        else if (map.width() < map.height()) {
+            width = ((double) map.width() / (double) map.height()) * height;
+        }
+
+        canvas.setWidth(width);
+        canvas.setHeight(height);
+
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
