@@ -72,8 +72,8 @@ public class Sample extends Application {
         primaryStage.setScene(new Scene(root, 1000, 800));
         primaryStage.show();
 
-        if (getParameters().getNamed().containsKey("f") && getParameters().getNamed().get("f") != null) {
-            Map map = new MapReader().read(Paths.get(getParameters().getNamed().get("f")));
+        if (getParameters().getNamed().containsKey("file") && getParameters().getNamed().get("file") != null) {
+            Map map = new MapReader().read(Paths.get(getParameters().getNamed().get("file")));
             draw(map, canvas, info);
         }
 

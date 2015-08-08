@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) throws ParseException, IOException {
         Options options = new Options();
-        options.addOption("f", true, "output map to file");
+        options.addOption("file", true, "output map to file");
         options.addOption("size", true, "size of map in format width[,height]. If the latter is omitted both will be set to the provided value.");
         options.addOption("areaWidth", true, "the width of areas in the map in format min[,max]. If the latter is omitted both will be set to the provided value.");
         options.addOption("areaHeight", true, "the height of areas in the map in format min[,max]. If the latter is omitted both will be set to the provided value.");
@@ -27,8 +27,8 @@ public class Main {
 
             Map map = generate(cmd);
 
-            if (cmd.hasOption("f") && cmd.getOptionValue("f") != null) {
-                MapFileWriter.forMap(map).write(new File(cmd.getOptionValue("f")));
+            if (cmd.hasOption("file") && cmd.getOptionValue("file") != null) {
+                MapFileWriter.forMap(map).write(new File(cmd.getOptionValue("file")));
             } else {
                 MapWriter.forMap(map).write(System.out);
             }
