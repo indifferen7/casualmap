@@ -44,12 +44,12 @@ public class Sample extends Application {
         btn.setLayoutY(10);
 
         final Text info = new Text();
-        title.setText("Sample map generator");
+        final Text density = new Text();
 
         final Canvas canvas = new Canvas();
         btn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                draw(MapGenerator.newBuilder().generate(), canvas, info);
+                draw(MapGenerator.newBuilder().generate(), canvas, info, density);
             }
         });
 
@@ -64,9 +64,13 @@ public class Sample extends Application {
         StackPane.setAlignment(btn, Pos.TOP_LEFT);
         StackPane.setMargin(btn, new Insets(30, 10, 10, 10));
 
+        root.getChildren().add(density);
+        StackPane.setAlignment(density, Pos.TOP_LEFT);
+        StackPane.setMargin(density, new Insets(60, 10, 10, 10));
+
         root.getChildren().add(info);
         StackPane.setAlignment(info, Pos.TOP_LEFT);
-        StackPane.setMargin(info, new Insets(60, 10, 10, 10));
+        StackPane.setMargin(info, new Insets(75, 10, 10, 10));
 
         root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root, 1000, 800));
@@ -74,13 +78,11 @@ public class Sample extends Application {
 
         if (getParameters().getNamed().containsKey("file") && getParameters().getNamed().get("file") != null) {
             Map map = new MapReader().read(Paths.get(getParameters().getNamed().get("file")));
-            draw(map, canvas, info);
+            draw(map, canvas, info, density);
         }
-
-
     }
 
-    private void draw(Map map, Canvas canvas, final Text info) {
+    private void draw(Map map, Canvas canvas, final Text info, final Text density) {
         double width = 600;
         double height = 600;
 
@@ -93,6 +95,7 @@ public class Sample extends Application {
 
         canvas.setWidth(width);
         canvas.setHeight(height);
+        density.setText("Tile density: " + map.tileDensity());
 
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -113,6 +116,7 @@ public class Sample extends Application {
                         int y = new Double(mouseEvent.getY() / heightRatio).intValue();
 
                         info.setText("Hovering tile: " + x + ", " + y);
+
                     }
                 });
 

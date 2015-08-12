@@ -3,6 +3,8 @@ package se.cs.casualmap.api.map;
 import se.cs.casualmap.api.shared.Direction;
 import se.cs.casualmap.api.shared.Tile;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -18,6 +20,7 @@ public class Map {
 
     private final int width;
     private final int height;
+    private double tileDensity;
 
     public Map(Set<Area> areas,
                Set<Passage> passages,
@@ -29,9 +32,22 @@ public class Map {
         checkArgument(mapWidth > 1, "Map width too low: %s", mapWidth);
         checkArgument(mapHeight > 1, "Map height too low: %s", mapHeight);
 
-
         this.width = mapWidth;
         this.height = mapHeight;
+
+        setTileDensity();
+    }
+
+    private void setTileDensity() {
+        double occupiedTiles = 0;
+        for (Area area : areas) {
+            occupiedTiles += area.allTiles().size();
+        }
+
+        tileDensity =
+                new BigDecimal(occupiedTiles / (double) (width * height))
+                        .setScale(2, RoundingMode.HALF_UP)
+                        .doubleValue();
     }
 
     /**
@@ -150,11 +166,22 @@ public class Map {
         return height;
     }
 
+    /**
+     * @return the tile density. The tile density is represented by
+     * a number between 0 and 1. 0 means that there are not tiles at
+     * all in areas, while 1 means that all tiles are in areas. Likely,
+     * the number is somewhere between 0 and 1.
+     */
+    public double tileDensity() {
+        return tileDensity;
+    }
+
     @Override
     public String toString() {
         return "Map{" +
                 "width=" + width +
                 ", height=" + height +
+                ", tileDensity=" + tileDensity +
                 '}';
     }
 

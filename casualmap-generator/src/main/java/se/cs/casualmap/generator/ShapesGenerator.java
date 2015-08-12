@@ -47,7 +47,7 @@ public class ShapesGenerator {
         }
 
         while (!hasFailedTooManyTimes(attempts)
-                && !tileDensityThresholdReached(grid)) {
+                && !desiredTileDensityReached(grid)) {
 
             Shape shape = shapeFactory.create(
                     Tile.at(0, 0),
@@ -70,20 +70,14 @@ public class ShapesGenerator {
             }
         }
 
-        // todo: think about whether or not to enforce this rule..
-        /*
-        checkArgument(!hasFailedTooManyTimes(attempts),
-                "Could not generate map after %s attempts, please check your arguments.", attempts);
-        */
-
         return grid.getShapes();
     }
 
-    private boolean tileDensityThresholdReached(Grid grid) {
+    private boolean desiredTileDensityReached(Grid grid) {
         double currentAreaDensity =
                 (double) grid.getNumberOfOccupiedTiles() / (double) (args.getWidth() * args.getHeight());
 
-        return  currentAreaDensity >= args.tileDensityThreshold();
+        return currentAreaDensity >= args.desiredTileDensity();
     }
 
     private boolean hasFailedTooManyTimes(int attempts) {

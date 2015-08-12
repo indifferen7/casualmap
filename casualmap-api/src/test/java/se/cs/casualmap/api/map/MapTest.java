@@ -79,6 +79,14 @@ public class MapTest {
         assertEquals(1, passages.size());
     }
 
+    @Test
+    public void tileDensityTest() {
+        Map map = newMap();
+
+        // 12 of 16 tiles are occupied in areas, i.e. 12 / 16 = 0.75
+        assertEquals(0.75, map.tileDensity(), 1e-15);
+    }
+
     private Map newMap() {
         /**
          * Like so:

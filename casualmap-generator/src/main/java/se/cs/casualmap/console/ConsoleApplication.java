@@ -23,6 +23,7 @@ public class ConsoleApplication {
         options.addOption("areaWidth", true, "the width of areas in the map in format min[,max]. If the latter is omitted both will be set to the provided value.");
         options.addOption("areaHeight", true, "the height of areas in the map in format min[,max]. If the latter is omitted both will be set to the provided value.");
         options.addOption("shapes", true, "the shapes that the map should contain in format shape1[,shape2]. Supported shape values as of today are RECTANGLE and CIRCLE.");
+        options.addOption("density", true, "the desired tile density. Expects a value between 0 and 1.");
 
         CommandLineParser parser = new DefaultParser();
 
@@ -82,6 +83,10 @@ public class ConsoleApplication {
                         .minAreaHeight(Integer.parseInt(areaHeight.get()[0]))
                         .maxAreaHeight(Integer.parseInt(areaHeight.get()[0]));
             }
+        }
+
+        if (cmd.hasOption("density") && cmd.getOptionValue("density") != null) {
+            argsBuilder.desiredTileDensity(Double.parseDouble(cmd.getOptionValue("density")));
         }
 
         MapGenerator.Builder mapBuilder =

@@ -13,11 +13,11 @@ public class Args {
     private final int maxAreaHeight;
     private final int minAreaWidth;
     private final int maxAreaWidth;
-    private final double tileDensityThreshold;
+    private final double desiredTileDensity;
 
     private Args(int width, int height, int minAreaHeight,
                  int maxAreaHeight, int minAreaWidth,
-                 int maxAreaWidth, double tileDensityThreshold) {
+                 int maxAreaWidth, double desiredTileDensity) {
 
         checkArgument(width > 1, "Expected map to be at least 2 tiles wide, got %s", width);
         checkArgument(height > 1, "Expected map to be at least 2 tiles high, got %s", height);
@@ -29,7 +29,7 @@ public class Args {
                 "Map width (%s) must be greater than the maximum area width (%s)", width, maxAreaWidth);
         checkArgument(height >= maxAreaHeight,
                 "Map height (%s) must be greater than the maximum area height (%s)", height, maxAreaHeight);
-        checkArgument(tileDensityThreshold > 0 && tileDensityThreshold <= 1,
+        checkArgument(desiredTileDensity > 0 && desiredTileDensity <= 1,
                 "Tile density threshold must be somewhere between 0 and 1");
 
         this.width = width;
@@ -38,7 +38,7 @@ public class Args {
         this.maxAreaHeight = maxAreaHeight;
         this.minAreaWidth = minAreaWidth;
         this.maxAreaWidth = maxAreaWidth;
-        this.tileDensityThreshold = tileDensityThreshold;
+        this.desiredTileDensity = desiredTileDensity;
     }
 
     public static Builder newBuilder() {
@@ -69,8 +69,8 @@ public class Args {
         return maxAreaWidth;
     }
 
-    public double tileDensityThreshold() {
-        return tileDensityThreshold;
+    public double desiredTileDensity() {
+        return desiredTileDensity;
     }
 
     public static class Builder {
@@ -80,7 +80,7 @@ public class Args {
         private int maxAreaHeight = 12;
         private int minAreaWidth = 6;
         private int maxAreaWidth = 12;
-        private double tileDensityThreshold = .7;
+        private double desiredTileDensity = .7;
 
         private Builder() {}
 
@@ -114,14 +114,14 @@ public class Args {
             return this;
         }
 
-        public Builder tileDensityThreshold(double tileDensityThreshold) {
-            this.tileDensityThreshold = tileDensityThreshold;
+        public Builder desiredTileDensity(double desiredTileDensity) {
+            this.desiredTileDensity = desiredTileDensity;
             return this;
         }
 
         public Args build() {
             return new Args(width, height, minAreaHeight, maxAreaHeight,
-                    minAreaWidth, maxAreaWidth, tileDensityThreshold);
+                    minAreaWidth, maxAreaWidth, desiredTileDensity);
         }
     }
 }
