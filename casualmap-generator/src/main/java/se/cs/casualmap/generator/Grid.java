@@ -5,6 +5,8 @@ import se.cs.casualmap.api.shared.Tile;
 
 import java.util.*;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * This class represents a grid, i.e. a rectangular space with coordinates in
  * which shapes can be placed. Shapes cannot be stacked on top of each other, and any
@@ -25,6 +27,9 @@ public class Grid {
     private Set<Tile> occupied = new HashSet<>();
 
     public Grid(int width, int height) {
+        checkArgument(width > 0, "Grid width must be greater than zero, got %s", width);
+        checkArgument(height > 0, "Grid height must be greater than zero, got %s", height);
+
         this.width = width;
         this.height = height;
     }

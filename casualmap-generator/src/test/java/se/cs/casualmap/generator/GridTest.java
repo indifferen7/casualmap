@@ -10,12 +10,19 @@ import java.util.Collection;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by indifferent on 7/29/15.
- */
 public class GridTest {
 
     private ShapeFactory<Rectangle> factory = new Rectangle.Factory();
+
+    @Test(expected = IllegalArgumentException.class)
+    public void illegalWidth() {
+        new Grid(-4, 100);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void illegalHeight() {
+        new Grid(100, 0);
+    }
 
     @Test
     public void place() {

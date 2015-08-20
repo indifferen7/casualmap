@@ -19,11 +19,11 @@ public class LineUpSuggestor {
         this.subject = subject;
     }
 
-    public static LineUpSuggestor newForShape(Shape subject) {
+    static LineUpSuggestor newForShape(Shape subject) {
         return new LineUpSuggestor(subject);
     }
 
-    public List<Shape> suggest(Shape shape) {
+    List<Shape> suggest(Shape shape) {
 
         List<Shape> result = new ArrayList<Shape>();
 
